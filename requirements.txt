@@ -1,2 +1,2 @@
-requests>=2.25.0,
+requests>=2.25.0
 stem>=1.8.0
