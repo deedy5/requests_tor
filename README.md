@@ -1,10 +1,10 @@
 # requestsTor
 
-Wrapper of the requests and stem libraries to make requests through TOR
+Wrapper of the [requests](https://docs.python-requests.org) and [stem](https://stem.torproject.org) libraries to make requests through [TOR](https://www.torproject.org)
 
 ## Dependencies
-1. download and start Tor or Torbrowser
-2. install stem and requests libraries
+1. download and start [Tor](https://www.torproject.org/download/tor/) or [Torbrowser](https://www.torproject.org/download/)
+2. install [requests](https://docs.python-requests.org) and [stem](https://stem.torproject.org) libraries
 ```
 pip install requests[socks]
 pip install stem
