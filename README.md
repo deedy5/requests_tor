@@ -10,7 +10,7 @@ pip install requestsTor
 
 ## Dependencies
 1. download and start [Tor](https://www.torproject.org/download/tor/) or [Torbrowser](https://www.torproject.org/download/)
-2. This is not necessary: сonfigure torrc file if you want to add socks ports, to change control port, or to add password for control port. [Tor manual](https://www.torproject.org/docs/tor-manual.html.en)
+2. [not necessary] сonfigure torrc file if you want to add socks ports, to change control port, or to add password for control port. [Tor manual](https://www.torproject.org/docs/tor-manual.html.en)
 
 ## Usage
 ```python
