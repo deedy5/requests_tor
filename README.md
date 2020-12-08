@@ -34,7 +34,7 @@ with requestsTor() as rt:
 
 ```
 ## Example: downloading list of urls concurrently with unique ip for each url
-Urls:  https://habr.com/ru/post/1 - https://habr.com/ru/post/100)
+Urls:  https://habr.com/ru/post/1 - https://habr.com/ru/post/100
 
 1. Add a tor socks ports in torrc file (TorBrowser\Data\Tor\torrc) and restart Torbrowser. [Tor manual](https://www.torproject.org/docs/tor-manual.html.en)
 ```
