@@ -53,36 +53,26 @@ SocksPort 9009 IsolateDestAddr
 2. 
 ```python
 from time import sleep
-from collections import deque
+from itertools import cycle
 from concurrent.futures import ThreadPoolExecutor
 from requestsTor import requestsTor
 
-def fetch(url):    
-    port = ports[-1]
-    ports.rotate()
-    with requestsTor() as rt:
-        res = rt.get(url, port=port)
-        print(F"Downloaded {res.url}")
-        return res.text
-         
-def new_ip():
-    with requestsTor() as rt:
-        return rt.new_ip()
-
 def main():    
     urls = (f'https://habr.com/ru/post/{x}' for x in range(1, 100))
-    result, counter = [], 1
+    ports = (x for x in cycle(range(9000, 9010)))
+    result, counter = [], 1    
     with ThreadPoolExecutor() as executor:
-        for r in executor.map(fetch, urls):
-            result.append(r)
-            if counter % 10 == 0:
-                new_ip()
-                print(f"Downloaded {counter} urls")
-                sleep(2)
-            counter += 1
+        with requestsTor() as rt:
+            for r in executor.map(rt.get, urls, ports):
+                print(r, r.url)
+                result.append(r.text)
+                if counter % 10 == 0:
+                    rt.new_ip()
+                    print(f"Downloaded {counter} urls")
+                    sleep(2)
+                counter += 1
     return result
 
 if __name__ == '__main__':
-    ports = deque([x for x in range(9000, 9010)])
     main()
 ```
