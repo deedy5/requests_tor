@@ -61,7 +61,9 @@ def fetch(url):
     port = ports[-1]
     ports.rotate()
     with requestsTor() as rt:
-        return rt.get(url, port=port).text
+        res = rt.get(url, port=port)
+        print(F"Downloaded {res.url}")
+        return res.text
          
 def new_ip():
     with requestsTor() as rt:
@@ -69,7 +71,7 @@ def new_ip():
 
 def main():    
     urls = (f'https://habr.com/ru/post/{x}' for x in range(1, 100))
-    result, counter = [], 0
+    result, counter = [], 1
     with ThreadPoolExecutor() as executor:
         for r in executor.map(fetch, urls):
             result.append(r)
