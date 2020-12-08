@@ -9,7 +9,8 @@ pip install requestsTor
 ```
 
 ## Dependencies
-download and start [Tor](https://www.torproject.org/download/tor/) or [Torbrowser](https://www.torproject.org/download/)
+1. download and start [Tor](https://www.torproject.org/download/tor/) or [Torbrowser](https://www.torproject.org/download/)
+2. This is not necessary: сonfigure torrc file if you want to add socks ports, to change control port, or to add password for control port. [Tor manual](https://www.torproject.org/docs/tor-manual.html.en)
 
 ## Usage
 ```python
@@ -60,10 +61,8 @@ def fetch(url):
     port = ports[-1]
     ports.rotate()
     with requestsTor() as rt:
-        responce = rt.get(url, port=port)
-        print(responce)
-        return responce
-
+        return rt.get(url, port=port).text
+         
 def new_ip():
     with requestsTor() as rt:
         return rt.new_ip()
@@ -76,6 +75,7 @@ def main():
             result.append(r)
             if counter % 10 == 0:
                 new_ip()
+                print(f"Downloaded {counter} urls")
                 sleep(2)
             counter += 1
     return result
