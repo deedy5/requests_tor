@@ -1,4 +1,4 @@
-# requestsTor v0.2
+# requestsTor
 
 Wrapper of the [requests](https://docs.python-requests.org) and [stem](https://stem.torproject.org) libraries to make requests through [TOR](https://www.torproject.org)
 
