@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(name='requestsTor',
-  version='0.1',
+  version='0.2',
   description='Wrapper of the requests and stem libraries to make requests through TOR',
   url='https://github.com/deedy5/requestsTor',
   author='deedy5',
