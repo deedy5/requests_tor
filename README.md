@@ -9,6 +9,11 @@ Wrapper of the [requests](https://docs.python-requests.org) and [stem](https://s
 pip install requests[socks]
 pip install stem
 ```
+## Install
+
+```
+pip install requestsTor
+```
 
 ## Usage
 ```python
