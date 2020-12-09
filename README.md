@@ -77,27 +77,20 @@ SocksPort 9004 IsolateDestAddr
 from collections import Counter
 from requestsTor import requestsTor
 
-def main():
-    rt = requestsTor(tor_ports=[9000, 9001, 9002, 9003, 9004], autochange_id=1, debug=1)
-    urls = (f'https://api.ipify.org' for x in range(1, 20))
-    results = rt.get_urls(urls)
-    print(Counter(result.text for result in results))
-    
-if __name__ == '__main__':
-    main()
+rt = requestsTor(tor_ports=[9000, 9001, 9002, 9003, 9004], autochange_id=1, debug=1)
+urls = (f'https://api.ipify.org' for x in range(1, 20))
+results = rt.get_urls(urls)
+print(Counter(result.text for result in results))
 ```
 3. Program
 ```python
 from requestsTor import requestsTor
 
-    rt = requestsTor(tor_ports=[9000, 9001, 9002, 9003, 9004], autochange_id=1, debug=1)
+rt = requestsTor(tor_ports=[9000, 9001, 9002, 9003, 9004], autochange_id=1, debug=1)
 
-    urls = (f'https://habr.com/ru/post/{x}' for x in range(1, 50))
-    results = rt.get_urls(urls)
-    for result in results:
-        print(result.status_code, result.url)
-    print(results[-1].text)
-
-if __name__ == '__main__':
-    main()
+urls = (f'https://habr.com/ru/post/{x}' for x in range(1, 50))
+results = rt.get_urls(urls)
+for result in results:
+    print(result.status_code, result.url)
+print(results[-1].text)
 ```
