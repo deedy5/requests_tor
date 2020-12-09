@@ -73,7 +73,18 @@ SocksPort 9003 IsolateDestAddr
 SocksPort 9004 IsolateDestAddr
 ```
 
-2. 
+2. Test
+```python
+from collections import Counter
+from requestsTor import requestsTor
+
+def main():
+    rt = requestsTor(tor_ports=[9000, 9001, 9002, 9003, 9004], autochange_id=1, debug=1)
+    urls = (f'https://api.ipify.org' for x in range(1, 20))
+    results = rt.get_urls(urls)
+    print(Counter(result.text for result in results))
+    
+3. Program
 ```python
 from requestsTor import requestsTor
 
