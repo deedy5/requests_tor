@@ -84,6 +84,9 @@ def main():
     results = rt.get_urls(urls)
     print(Counter(result.text for result in results))
     
+if __name__ == '__main__':
+    main()
+```
 3. Program
 ```python
 from requestsTor import requestsTor
