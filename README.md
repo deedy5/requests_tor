@@ -60,7 +60,7 @@ print(r.text)
 urls = (f'https://api.my-ip.io/ip' for _ in range(10))
 results = rt.get_urls(urls)
 for result in results:
-print(result.url, result.text) 
+    print(result.url, result.text) 
  ```
 ### Example: downloading list of urls concurrently with unique ip for each url
 Urls:  https://habr.com/ru/post/1 - https://habr.com/ru/post/50
