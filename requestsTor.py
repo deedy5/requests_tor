@@ -9,10 +9,13 @@ from stem.control import Controller
 
 class requestsTor(object):
     '''
-    If autochange_id = 5, Tor identity will be changed automatically
-    as soon as 5 urls will be downloaded through the one tor
-    socks port. So, if you have 5 socks ports, Tor identity
-    will be changed after downloading of 25 urls at all.
+    Wrapper of the requests and stem libraries to make requests via TOR.
+    tor_ports = specify Tor socks ports list (default is [9150]),
+    tor_cport = specify Tor control port (default is 9151),
+    tor_cport = specify Tor control port password (default is None),
+    autochange_id = specify how many urls will be downloaded via a one Tor socks port (default is 5),
+    threads = specify how many threads will be used to download urls list (default = min(32, os.cpu_count() + 4)),
+    debug = 1, if you want to print additional information (default is 0).
     '''
     
     def __init__(self, tor_ports=[9150], tor_cport=9151, password=None, autochange_id=5, threads=None, debug=0):
