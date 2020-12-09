@@ -32,7 +32,5 @@ def main():
     print(Counter(r.text for r in res2))
     
 
-    
-
 if __name__ == '__main__':
     main()
