@@ -26,7 +26,7 @@ print(r.text)
 ```python
 from requestsTor import requestsTor
 
-rt = requestsTor(tor_ports=[9150], tor_cport=9151, password=None, autochange_id=5, threads=None, debug=0) as rt:
+rt = requestsTor(tor_ports=[9150], tor_cport=9151, password=None, autochange_id=5, threads=None, debug=0)
 '''
 tor_ports = specify Tor socks ports list (default is [9150]),
 tor_cport = specify Tor control port (default is 9151),
