@@ -21,7 +21,12 @@ rt = requestsTor()
 
 url = 'https://foxnews.com'
 r = rt.get(url)
-print(r.text) 
+print(r.text)
+
+urls = (f'https://foxnews.com' for _ in range(10))
+res = rt.get_urls(urls)
+for result in res:
+    print(result.text)
 ```
 ## Advanced usage
 ```python
