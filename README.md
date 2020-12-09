@@ -1,6 +1,7 @@
 # requestsTor
 
-Wrapper of the [requests](https://docs.python-requests.org) and [stem](https://stem.torproject.org) libraries to make requests via [TOR](https://www.torproject.org)
+Wrapper of the [requests](https://docs.python-requests.org) and [stem](https://stem.torproject.org) libraries to make requests via [TOR](https://www.torproject.org).
+Downloading of urls list concurrently.
 
 ## Install
 
