@@ -1,21 +1,21 @@
 # requestsTor
 
-### Requests via [TOR](https://www.torproject.org) with automatic TOR new identity. 
+Requests via [TOR](https://www.torproject.org) with automatic TOR new identity. 
 Downloading of urls list concurrently.
 Wrapper of the [requests](https://docs.python-requests.org) and [stem](https://stem.torproject.org) libraries. 
 
 
-## Install
+### Install
 
 ```
 pip install requestsTor
 ```
 
-## Dependencies
+### Dependencies
 1. download and start [Tor](https://www.torproject.org/download/tor/) or [Torbrowser](https://www.torproject.org/download/)
 2. [not necessary] edit torrc file, if you want to add socks ports, to change control port, or to add password for control port. [Tor manual](https://www.torproject.org/docs/tor-manual.html.en)
 
-## Simple usage
+### Simple usage
 ```python
 from requestsTor import requestsTor
 
@@ -30,7 +30,7 @@ res = rt.get_urls(urls)
 for result in res:
     print(result.text)
 ```
-## Advanced usage
+### Advanced usage
 ```python
 from requestsTor import requestsTor
 
@@ -62,7 +62,7 @@ results = rt.get_urls(urls)
 for result in results:
 print(result.url, result.text) 
  ```
-## Example: downloading list of urls concurrently with unique ip for each url
+### Example: downloading list of urls concurrently with unique ip for each url
 Urls:  https://habr.com/ru/post/1 - https://habr.com/ru/post/50
 1. Add a tor socks ports in torrc file (TorBrowser\Data\Tor\torrc) and restart Torbrowser. [Tor manual](https://www.torproject.org/docs/tor-manual.html.en)
 ```
