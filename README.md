@@ -63,7 +63,6 @@ print(result.url, result.text)
  ```
 ## Example: downloading list of urls concurrently with unique ip for each url
 Urls:  https://habr.com/ru/post/1 - https://habr.com/ru/post/50
-
 1. Add a tor socks ports in torrc file (TorBrowser\Data\Tor\torrc) and restart Torbrowser. [Tor manual](https://www.torproject.org/docs/tor-manual.html.en)
 ```
 SocksPort 9000 IsolateDestAddr
@@ -72,7 +71,6 @@ SocksPort 9002 IsolateDestAddr
 SocksPort 9003 IsolateDestAddr
 SocksPort 9004 IsolateDestAddr
 ```
-
 2. Test
 ```python
 from collections import Counter
