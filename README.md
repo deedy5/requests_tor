@@ -72,7 +72,7 @@ for result in results:
  ```
 ### Example: downloading list of urls concurrently with unique ip for each url
 Urls:  https://habr.com/ru/post/1 - https://habr.com/ru/post/50
-1. Edit torrc file (TorBrowser\Data\Tor\torrc): add an additionak tor socks ports and restart Torbrowser. [Tor manual](https://www.torproject.org/docs/tor-manual.html.en)
+1. Edit torrc file (TorBrowser\Data\Tor\torrc): add an additional tor socks ports and restart Torbrowser. [Tor manual](https://www.torproject.org/docs/tor-manual.html.en)
 ```
 SocksPort 9000 IsolateDestAddr
 SocksPort 9001 IsolateDestAddr
