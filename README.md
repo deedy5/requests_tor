@@ -1,7 +1,7 @@
 # requestsTor
 
-Requests via [TOR](https://www.torproject.org) with automatic TOR new identity. 
-Downloading of urls list concurrently.
+Multithreading requests via [TOR](https://www.torproject.org) with automatic TOR new identity. 
+
 Wrapper of the [requests](https://docs.python-requests.org) and [stem](https://stem.torproject.org) libraries. 
 
 
