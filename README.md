@@ -41,7 +41,7 @@ rt = RequestsTor(tor_ports=[9150], tor_cport=9151, password=None,
     is set, the requests will be sent sequentially through each port
     tor_cport = specify Tor control port (default is 9151),
     tor_cport = specify Tor control port password (default is None),
-    autochange_id = specify urls via a one Tor socks port (default is 5) to change TOR identity,
+    autochange_id = number of requests via a one Tor socks port (default=5) to TOR new identity,
     threads = specify threads to download urls list (default = min(32, os.cpu_count() + 4)),
     debug = 1, if you want to print additional information (default is 0).
 '''
