@@ -8,6 +8,7 @@ from stem import Signal
 from stem.control import Controller
 
 
+
 class requestsTor(object):
     """
     Wrapper of the requests and stem libraries to make requests via TOR.
