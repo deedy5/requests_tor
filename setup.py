@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="requestsTor",
-    version="0.4",
+    version="0.5",
     author="deedy5",
     author_email="deedy-ru@ya.ru",
     description="Multithreading requests via TOR with automatic TOR new identity",
