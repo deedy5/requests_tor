@@ -1,4 +1,4 @@
-# requestsTor
+# requests_tor
 
 Multithreading requests via [TOR](https://www.torproject.org) with automatic TOR new identity. 
 
@@ -8,7 +8,7 @@ Wrapper of the [requests](https://docs.python-requests.org) and [stem](https://s
 ### Install
 
 ```
-pip install requestsTor
+pip install requests_tor
 ```
 
 ### Dependencies
