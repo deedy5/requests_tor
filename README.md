@@ -50,7 +50,7 @@ rt = RequestsTor(tor_ports=[9150], tor_cport=9151, password=None,
 ip = rt.check_ip()
 print(ip) 
 
-# new Tor identity    
+# new Tor identity. Сalling this function includes time.sleep(3)
 rt.new_id()
 
 # test automatic TOR new identity
