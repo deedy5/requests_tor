@@ -4,10 +4,10 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(name='requestsTor',
-    version='0.3',  
+    version='0.4',  
     author='deedy5',
     author_email='deedy-ru@ya.ru',
-    description='Requests via TOR with automatic TOR new identity. Downloading of urls list concurrently. Wrapper of the requests and stem libraries.',
+    description='Multithreading requests via TOR with automatic TOR new identity',
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://github.com/deedy5/requestsTor',
