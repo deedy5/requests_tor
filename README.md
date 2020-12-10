@@ -51,16 +51,21 @@ print(ip)
 # new Tor identity    
 rt.new_id()
 
+# test automatic TOR new identity
+rt.test()
+
 # get url
 url = 'https://foxnews.com'
 r = rt.get(url)
 print(r.text) 
 
-# # get urls list concurrently
+# get urls list concurrently
 urls = (f'https://api.my-ip.io/ip' for _ in range(10))
 results = rt.get_urls(urls)
 for result in results:
     print(result.url, result.text) 
+
+
  ```
 ### Example: downloading list of urls concurrently with unique ip for each url
 Urls:  https://habr.com/ru/post/1 - https://habr.com/ru/post/50
@@ -72,21 +77,11 @@ SocksPort 9002 IsolateDestAddr
 SocksPort 9003 IsolateDestAddr
 SocksPort 9004 IsolateDestAddr
 ```
-2. Test
-```python
-from collections import Counter
-from requestsTor import requestsTor
-
-rt = requestsTor(tor_ports=[9000, 9001, 9002, 9003, 9004], autochange_id=1, debug=1)
-urls = (f'https://api.ipify.org' for x in range(1, 20))
-results = rt.get_urls(urls)
-print(Counter(result.text for result in results))
-```
-3. Program
+2. Program
 ```python
 from requestsTor import requestsTor
 
-rt = requestsTor(tor_ports=[9000, 9001, 9002, 9003, 9004], autochange_id=1, debug=1)
+rt = requestsTor(tor_ports=[9000, 9001, 9002, 9003, 9004], autochange_id=1)
 
 urls = (f'https://habr.com/ru/post/{x}' for x in range(1, 50))
 results = rt.get_urls(urls)
