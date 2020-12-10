@@ -61,7 +61,9 @@ url = 'https://foxnews.com'
 r = rt.get(url)
 print(r.text) 
 
-# get urls list concurrently
+# get urls list concurrently. TOR new identity is executed depending on the number of socksports and 
+# autochange_id parameter. In case of 5 socksports and autochange_id=5, after downloading 5*5=25 urls
+# TOR identity will be changed. It does matter, because calling TOR new identity includes time.sleep(3)
 urls = (f'https://api.my-ip.io/ip' for _ in range(10))
 results = rt.get_urls(urls)
 for result in results:
