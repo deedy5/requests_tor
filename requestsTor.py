@@ -1,6 +1,8 @@
-# v0.3
+# v0.4
 from time import sleep
+from random import choice
 from itertools import cycle
+from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 import requests
 from stem import Signal
@@ -27,10 +29,10 @@ class requestsTor(object):
                         "Accept-Encoding": "gzip, deflate, br", "Accept-Language": "en-US,en;q=0.5",
                         "Upgrade-Insecure-Requests": "1",
                         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0"}
-        self.ip_api_list = cycle(['https://api.my-ip.io/ip', 'https://api.ipify.org', 'https://ifconfig.me/ip',
+        self.ip_api_list = ['https://api.my-ip.io/ip', 'https://api.ipify.org', 'https://ifconfig.me/ip',
                                   'https://icanhazip.com/', 'https://ipinfo.io/ip', 'https://whoer.net/ip',
                                   'https://wtfismyip.com/text', 'https://checkip.amazonaws.com/',
-                                  'https://bot.whatismyipaddress.com',])
+                                  'https://bot.whatismyipaddress.com',]
         self.autochange_id = autochange_id
         self.newid_counter = cycle(range(1, autochange_id+1)) if autochange_id else None
         self.threads = threads
@@ -46,7 +48,7 @@ class requestsTor(object):
             sleep(3)
 
     def check_ip(self):
-        ip_api_url = next(self.ip_api_list)
+        ip_api_url = choice(self.ip_api_list)
         return self.get(ip_api_url).text
 
     def _fetch(self, url):
@@ -79,8 +81,17 @@ class requestsTor(object):
         return results
     
     def _fetch_urls(self, urls):
-        results = []
         with ThreadPoolExecutor(max_workers=self.threads) as executor:
-            for resp in executor.map(self._fetch, urls):
-                results.append(resp)             
-        return results
+            return [resp for resp in executor.map(self._fetch, urls)]        
+
+    def test(self):
+        print(f'\nTEST\nSocks ports count = {self.tor_ports_count}. Autochange_id = {self.autochange_id}\n')
+        self.new_id()
+        ip_url = choice(self.ip_api_list)
+        print(f'Checking your ip from: {ip_url}')
+        my_ip_list = [ip_url for _ in range(30)]
+        results = self.get_urls(my_ip_list)
+        resultsCounter = Counter(res.text for res in results)
+        print('\nResults:')
+        for k,v in resultsCounter.items():
+            print(f"Your IP: {k} was {v} times")
