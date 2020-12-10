@@ -17,9 +17,9 @@ pip install requests_tor
 
 ### Simple usage
 ```python
-from requestsTor import requestsTor
+from requests_tor import RequestsTor
 
-rt = requestsTor()
+rt = RequestsTor()
 
 url = 'https://foxnews.com'
 r = rt.get(url)
@@ -32,9 +32,9 @@ for result in res:
 ```
 ### Advanced usage
 ```python
-from requestsTor import requestsTor
+from requests_tor import RequestsTor
 
-rt = requestsTor(tor_ports=[9150], tor_cport=9151, password=None, 
+rt = RequestsTor(tor_ports=[9150], tor_cport=9151, password=None, 
                  autochange_id=5, threads=None, debug=0)
 '''
 tor_ports = specify Tor socks ports list (default is [9150]),
@@ -82,9 +82,9 @@ SocksPort 9004 IsolateDestAddr
 ```
 2. Program
 ```python
-from requestsTor import requestsTor
+from requests_tor import RequestsTor
 
-rt = requestsTor(tor_ports=[9000, 9001, 9002, 9003, 9004], autochange_id=1)
+rt = RequestsTor(tor_ports=[9000, 9001, 9002, 9003, 9004], autochange_id=1)
 
 urls = (f'https://habr.com/ru/post/{x}' for x in range(1, 50))
 results = rt.get_urls(urls)
