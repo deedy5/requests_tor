@@ -11,7 +11,8 @@ from stem.control import Controller
 class requestsTor(object):
     """
     Wrapper of the requests and stem libraries to make requests via TOR.
-    tor_ports = specify Tor socks ports list (default is [9150]),
+    tor_ports = specify Tor socks ports list (default is [9150]), if more than one port
+    is set, the requests will be sent sequentially through each port
     tor_cport = specify Tor control port (default is 9151),
     tor_cport = specify Tor control port password (default is None),
     autochange_id = specify urls via a one Tor socks port (default is 5) to change TOR identity,
