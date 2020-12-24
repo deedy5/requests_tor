@@ -19,7 +19,8 @@ pip install requests_tor
 ```python
 from requests_tor import RequestsTor
 
-rt = RequestsTor()
+rt = RequestsTor() #for Windows
+rt = RequestsTor(tor_ports=[9050], tor_cport=9051) #for Linux, default socksport 9050, default control port 9051
 
 url = 'https://foxnews.com'
 r = rt.get(url)
