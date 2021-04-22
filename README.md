@@ -1,4 +1,4 @@
-[![Python >= 3.6](https://img.shields.io/badge/python->=3.6-red.svg)](https://www.python.org/downloads/) [![](https://badgen.net/github/release/deedy5/requests_tor)](https://github.com/deedy5/requests_tor/releases) [![](https://badge.fury.io/py/requests-tor.svg)](https://pypi.org/project/requests-tor)<img align="right" src="https://i.ibb.co/sqq3k63/star.jpg">
+[![Python >= 3.6](https://img.shields.io/badge/python->=3.6-red.svg)](https://www.python.org/downloads/) [![](https://badgen.net/github/release/deedy5/requests_tor)](https://github.com/deedy5/requests_tor/releases) [![](https://badge.fury.io/py/requests-tor.svg)](https://pypi.org/project/requests-tor)
 # requests_tor 
 
 Multithreading requests via [TOR](https://www.torproject.org) with automatic TOR new identity.
