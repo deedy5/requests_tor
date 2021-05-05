@@ -9,6 +9,9 @@ import requests
 from stem import Signal
 from stem.control import Controller
 
+
+__version__ = 0.9
+
 IP_API = ("https://api.my-ip.io/ip", "https://api.ipify.org",
           "https://icanhazip.com", "https://ipinfo.io/ip",
           "https://wtfismyip.com/text", "https://ifconfig.me/ip",
