@@ -1,11 +1,12 @@
 from setuptools import setup
+from requests_tor import __version__
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
     name="requests_tor",
-    version="0.8",
+    version=__version__,
     author="deedy5",
     description="Multithreading requests via TOR with automatic TOR new identity",
     long_description=long_description,
