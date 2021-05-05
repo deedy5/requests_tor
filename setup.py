@@ -7,7 +7,6 @@ setup(
     name="requests_tor",
     version="0.8",
     author="deedy5",
-    author_email="deedy-ru@ya.ru",
     description="Multithreading requests via TOR with automatic TOR new identity",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -16,7 +15,7 @@ setup(
     py_modules=["requests_tor"],
     install_requires=["requests>=2.25.0", "stem>=1.8.0"],
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
