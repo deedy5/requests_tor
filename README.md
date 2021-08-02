@@ -141,11 +141,11 @@ rt.head(url, **kwargs)
         """
 
 url = 'https://httpbin.org/anything'
-params={
+params = {
     "id": 12345,
     "status": 'passed'
     }
-headers={
+headers = {
     "Origin": "https://www.foxnews.com",
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36"
     }
