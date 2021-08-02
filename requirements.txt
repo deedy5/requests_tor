@@ -1,2 +1,2 @@
-requests[socks]>=2.25.0
+requests[socks]>=2.26.0
 stem>=1.8.0
