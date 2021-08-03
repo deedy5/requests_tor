@@ -15,7 +15,7 @@ setup(
     url="https://github.com/deedy5/requests_tor",
     license="MIT",
     py_modules=["requests_tor"],
-    install_requires=["requests>=2.26.0", "stem>=1.8.0"],
+    install_requires=["requests[socks]>=2.26.0", "stem>=1.8.0"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: MIT License",
