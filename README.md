@@ -33,8 +33,11 @@ Download and start [Tor Browser](https://www.torproject.org/download/) or instal
 ```python
 from requests_tor import RequestsTor
 
-rt = RequestsTor() #for Tor Browser
-rt = RequestsTor(tor_ports=(9050,), tor_cport=9051) #for Tor
+# If you use the Tor browser
+rt = RequestsTor()
+OR
+# If you use the Tor
+rt = RequestsTor(tor_ports=(9050,), tor_cport=9051)
 
 url = 'https://httpbin.org/anything'
 r = rt.get(url)
