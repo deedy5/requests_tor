@@ -1,4 +1,4 @@
-[![Python >= 3.6](https://img.shields.io/badge/python->=3.6-red.svg)](https://www.python.org/downloads/) [![](https://badgen.net/github/release/deedy5/requests_tor)](https://github.com/deedy5/requests_tor/releases) [![](https://badge.fury.io/py/requests-tor.svg)](https://pypi.org/project/requests-tor) [![Downloads](https://pepy.tech/badge/requests-tor/month)](https://pepy.tech/project/requests-tor)
+[![Python >= 3.6](https://img.shields.io/badge/python->=3.6-red.svg)](https://www.python.org/downloads/) [![](https://badgen.net/github/release/deedy5/requests_tor)](https://github.com/deedy5/requests_tor/releases) [![](https://badge.fury.io/py/requests-tor.svg)](https://pypi.org/project/requests-tor) 
 # requests_tor 
 
 `Release history:` [https://pypi.org/project/requests-tor/#history](https://pypi.org/project/requests-tor/#history)
