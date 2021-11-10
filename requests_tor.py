@@ -10,7 +10,7 @@ from stem import Signal
 from stem.control import Controller
 
 
-__version__ = '1.1.2'
+__version__ = '1.2'
 
 IP_API = ("https://api.my-ip.io/ip", "https://api.ipify.org",
           "https://icanhazip.com", "https://ipinfo.io/ip",
@@ -25,7 +25,7 @@ TOR_HEADERS = {
     "Accept-Encoding": "gzip, deflate, br",
     "Accept-Language": "en-US,en;q=0.5",
     "Upgrade-Insecure-Requests": "1",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101 Firefox/91.0",
     }
 
 
