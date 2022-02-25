@@ -65,8 +65,14 @@ class RequestsTor():
 
     def request(self, method, url, **kwargs):
         port = next(self.ports)
+
+        # if using requests_tor as drop in replacement for requests remove any user set proxies
+        if hasattr(kwargs, "proxies"):
+            del kwargs["proxies"]
+                    
         proxies = {"http": f"socks5h://localhost:{port}",
                    "https": f"socks5h://localhost:{port}"}
+        
         kwargs["headers"] = kwargs.get("headers", TOR_HEADERS)
         resp = requests.request(method, url, **kwargs, proxies=proxies)
         print(f"SocksPort={port} status={resp.status_code} url={resp.url}")
