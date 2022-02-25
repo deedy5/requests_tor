@@ -67,7 +67,7 @@ class RequestsTor():
         port = next(self.ports)
 
         # if using requests_tor as drop in replacement for requests remove any user set proxies
-        if hasattr(kwargs, "proxies"):
+        if kwargs.__contains__("proxies"):
             del kwargs["proxies"]
                     
         proxies = {"http": f"socks5h://localhost:{port}",
