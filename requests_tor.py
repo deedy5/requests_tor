@@ -10,15 +10,15 @@ from stem import Signal
 from stem.control import Controller
 
 
-__version__ = '1.2'
+__version__ = '1.2.1'
 
 IP_API = ("https://api.my-ip.io/ip", "https://api.ipify.org",
           "https://icanhazip.com", "https://ipinfo.io/ip",
           "https://wtfismyip.com/text", "https://ifconfig.me/ip",
-          "https://checkip.amazonaws.com", "https://ip.seeip.org",
-          "https://bot.whatismyipaddress.com", "https://api.myip.la",
+          "https://checkip.amazonaws.com", "https://api.myip.la",
           "https://ipapi.co/ip", "https://trackip.net/ip",
-          "https://ip.rootnet.in/")
+          "https://ip.rootnet.in", "https://myexternalip.com/raw",
+          "https://ip8.com/ip",)
 
 TOR_HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
