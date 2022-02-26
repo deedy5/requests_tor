@@ -15,7 +15,7 @@ setup(
     url="https://github.com/deedy5/requests_tor",
     license="MIT",
     py_modules=["requests_tor"],
-    install_requires=["requests[socks]>=2.26.0", "stem>=1.8.0", "brotli>=1.0.9"],
+    install_requires=["requests[socks]>=2.27.1", "stem>=1.8.0", "brotli>=1.0.9"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: MIT License",
