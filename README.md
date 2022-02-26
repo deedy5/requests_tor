@@ -142,6 +142,13 @@ rt.head(url, **kwargs)
         cert – (optional) if String, path to ssl client cert file (.pem). 
                 If Tuple, (‘cert’, ‘key’) pair.
         """
+```
+## Examples
+### 1. Get url with unique params and headers in request.
+```python
+from requests_tor import RequestsTor
+
+rt = RequestsTor(tor_ports=(9000, 9001, 9002, 9003, 9004), autochange_id=5)
 
 url = 'https://httpbin.org/anything'
 params = {
@@ -154,6 +161,13 @@ headers = {
     }
 r = rt.get(url, params=params, headers=headers)
 print(r.text)  
+```
+
+### 2. Get list of urls concurrently.
+```python
+from requests_tor import RequestsTor
+
+rt = RequestsTor(tor_ports=(9000, 9001, 9002, 9003, 9004), autochange_id=5)
 
 # get urls list concurrently. TOR new identity is executed depending on the number of socksports and 
 # autochange_id parameter. In case of 5 socksports and autochange_id=5, after downloading 5*5=25 urls
@@ -163,18 +177,16 @@ urls = (f'https://checkip.amazonaws.com' for _ in range(10))
 results = rt.get_urls(urls)
 for r in results:
     print(r.text) 
+```
 
-
- ```
-### Example: downloading list of urls concurrently with unique ip for each url
-Urls:  https://habr.com/ru/post/1 - https://habr.com/ru/post/50
-
+ 
+### 3. Get list of urls concurrently with unique ip for each url
 ```python
 from requests_tor import RequestsTor
 
 rt = RequestsTor(tor_ports=(9000, 9001, 9002, 9003, 9004), autochange_id=1)
 
-urls = (f'https://habr.com/ru/post/{x}' for x in range(1, 50))
+urls = (f'https://habr.com/ru/post/{x}' for x in range(1, 51))
 r = rt.get_urls(urls)
 print(r[-1].text)
 ```
