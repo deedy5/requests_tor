@@ -26,7 +26,12 @@ pip install -U requests_tor
 ```
 
 ### Dependencies
-Download and start [Tor Browser](https://www.torproject.org/download/) or install [Tor](https://www.torproject.org/docs/installguide.html.en)
+Download and start [Tor Browser](https://www.torproject.org/download/) or install [Tor](https://community.torproject.org/onion-services/setup/install/)
+
+_Notes:_
+* In Tor [torrc file](https://support.torproject.org/tbb/tbb-editing-torrc/) control port is disabled by default. Needs to uncomment line `ControlPort 9051`
+* If you face an error `Authentication failed: unable to read '/run/tor/control.authcookie' ([Errno 13] Permission denied: '/run/tor/control.authcookie')` - needs to add your current user to the tor group. `ps ax o comm,group | grep tor` - command to find tor group (group name will be in the second column, for example `debian-tor`). `sudo usermod -a -G debian-tor $USER` - add your current user to tor group
+* Restart Tor (`/etc/init.d/tor restart`) and re-login
 
 ---
 ### Simple usage
