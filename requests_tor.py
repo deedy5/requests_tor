@@ -37,11 +37,12 @@ class RequestsTor():
     password = specify Tor control port password (default is None);
     autochange_id = number of requests via a one Tor socks port (default=5) to change TOR identity,
     specify autochange_id = 0 to turn off autochange Tor identity;
-    threads = specify threads to download urls list (default=8).
+    threads = specify threads to download urls list (default=8);
+    verbose = print debug information (default=False).
     """
 
     def __init__(self, tor_ports=(9150,), tor_cport=9151, password=None,
-                 autochange_id=5, threads=8):
+                 autochange_id=5, threads=8, verbose=False):
         self.tor_ports = tor_ports
         self.tor_cport = tor_cport
         self.password = password
@@ -50,17 +51,20 @@ class RequestsTor():
         self.ports = cycle(tor_ports)
         self.newid_counter = autochange_id * len(tor_ports)
         self.newid_cycle = cycle(range(1, self.newid_counter + 1))
+        self.verbose = verbose
 
     def new_id(self):
         with Controller.from_port(port=self.tor_cport) as controller:
             controller.authenticate(password=self.password)            
             controller.signal(Signal.NEWNYM)
-            print(f"\nTOR cport auth: {controller.is_authenticated()}. TOR NEW IDENTITY. Sleep 3 sec.\n")
+            if self.verbose:
+                print(f"\nTOR cport auth: {controller.is_authenticated()}. TOR NEW IDENTITY. Sleep 3 sec.\n")
             sleep(3)
 
     def check_ip(self):
         my_ip = self.get(choice(IP_API)).text
-        print(f"my_ip = {my_ip}")
+        if self.verbose:
+            print(f"my_ip = {my_ip}")
         return my_ip
 
     def request(self, method, url, **kwargs):
@@ -75,7 +79,8 @@ class RequestsTor():
         
         kwargs["headers"] = kwargs.get("headers", TOR_HEADERS)
         resp = requests.request(method, url, **kwargs, proxies=proxies)
-        print(f"SocksPort={port} status={resp.status_code} url={resp.url}")
+        if self.verbose:
+            print(f"SocksPort={port} status={resp.status_code} url={resp.url}")
         if self.autochange_id and next(self.newid_cycle) == self.newid_counter:
             self.new_id()
         return resp
@@ -114,11 +119,13 @@ class RequestsTor():
                                     executor.map(partial(self.get, **kwargs), temp_urls)]
                     results.extend(temp_results)
                     temp_urls.clear()
-                    print(f"Progress: {i} urls")
+                    if self.verbose:
+                        print(f"Progress: {i} urls")
             temp_results = [resp for resp in
                             executor.map(partial(self.get, **kwargs), temp_urls)]
             results.extend(temp_results)
-            print("Progress: finished")
+            if self.verbose:
+                print("Progress: finished")
         return results
 
     def test(self):
