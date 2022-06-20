@@ -79,7 +79,7 @@ HashedControlPassword hashed_password
 from requests_tor import RequestsTor
 
 rt = RequestsTor(tor_ports=(9000, 9001, 9002, 9003, 9004), tor_cport=9151, password=None,
-                 autochange_id=5, threads=8,)
+                 autochange_id=5, threads=8, verbose=True)
 """
     tor_ports = specify Tor socks ports tuple (default is (9150,), as the default in Tor Browser),
     if more than one port is set, the requests will be sent sequentially through the each port;
