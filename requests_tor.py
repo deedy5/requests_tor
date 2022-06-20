@@ -37,7 +37,8 @@ class RequestsTor():
     password = specify Tor control port password (default is None);
     autochange_id = number of requests via a one Tor socks port (default=5) to change TOR identity,
     specify autochange_id = 0 to turn off autochange Tor identity;
-    threads = specify threads to download urls list (default=8).
+    threads = specify threads to download urls list (default=8);
+    verbose = print debug information (default=False).
     """
 
     def __init__(self, tor_ports=(9150,), tor_cport=9151, password=None,
