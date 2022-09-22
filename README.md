@@ -60,7 +60,7 @@ print(r[-1].text)
 ### Advanced usage
 [Edit torrc file](https://support.torproject.org/tbb/tbb-editing-torrc/):
 
-1. add [socks ports](https://www.torproject.org/docs/tor-manual.html.en#SocksPort),
+1. add [socks ports](https://2019.www.torproject.org/docs/tor-manual.html.en#SocksPort),
 ```
 SocksPort 9000 IsolateDestAddr
 SocksPort 9001 IsolateDestAddr
@@ -70,7 +70,7 @@ SocksPort 9004 IsolateDestAddr
 ```
 2. add password for control port [not necessary]:
 
-generate and add in torrc file [HashedControlPassword](https://www.torproject.org/docs/tor-manual.html.en#HashedControlPassword).
+generate and add in torrc file [HashedControlPassword](https://2019.www.torproject.org/docs/tor-manual.html.en#HashedControlPassword).
 ```
 HashedControlPassword hashed_password
 ```
