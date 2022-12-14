@@ -10,7 +10,7 @@ from stem import Signal
 from stem.control import Controller
 
 
-__version__ = "1.3"
+__version__ = "1.4"
 
 IP_API = (
     "https://api.my-ip.io/ip",
@@ -45,8 +45,7 @@ class RequestsTor:
     password = specify Tor control port password (default is None);
     autochange_id = number of requests via a one Tor socks port (default=5) to change TOR identity,
     specify autochange_id = 0 to turn off autochange Tor identity;
-    threads = specify threads to download urls list (default=8);
-    verbose = print debug information (default=False).
+    threads = specify threads to download urls list (default=8).
     """
 
     def __init__(
