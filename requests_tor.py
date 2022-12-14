@@ -1,3 +1,4 @@
+import logging
 from time import sleep
 from random import choice
 from itertools import cycle
@@ -73,7 +74,7 @@ class RequestsTor:
             controller.authenticate(password=self.password)
             controller.signal(Signal.NEWNYM)
             if self.verbose:
-                print(
+                logging.info(
                     f"\nTOR cport auth: {controller.is_authenticated()}. TOR NEW IDENTITY. Sleep 3 sec.\n"
                 )
             sleep(3)
@@ -81,7 +82,7 @@ class RequestsTor:
     def check_ip(self):
         my_ip = self.get(choice(IP_API)).text
         if self.verbose:
-            print(f"my_ip = {my_ip}")
+            logging.info(f"my_ip = {my_ip}")
         return my_ip
 
     def request(self, method, url, **kwargs):
@@ -99,34 +100,28 @@ class RequestsTor:
         kwargs["headers"] = kwargs.get("headers", TOR_HEADERS)
         resp = requests.request(method, url, **kwargs, proxies=proxies)
         if self.verbose:
-            print(f"SocksPort={port} status={resp.status_code} url={resp.url}")
+            logging.info(f"SocksPort={port} status={resp.status_code} url={resp.url}")
         if self.autochange_id and next(self.newid_cycle) == self.newid_counter:
             self.new_id()
         return resp
 
     def get(self, url, **kwargs):
-        method = "GET"
-        return self.request(method, url, **kwargs)
+        return self.request("GET", url, **kwargs)
 
     def post(self, url, **kwargs):
-        method = "POST"
-        return self.request(method, url, **kwargs)
+        return self.request("POST", url, **kwargs)
 
     def put(self, url, **kwargs):
-        method = "PUT"
-        return self.request(method, url, **kwargs)
+        return self.request("PUT", url, **kwargs)
 
     def patch(self, url, **kwargs):
-        method = "PATCH"
-        return self.request(method, url, **kwargs)
+        return self.request("PATCH", url, **kwargs)
 
     def delete(self, url, **kwargs):
-        method = "DELETE"
-        return self.request(method, url, **kwargs)
+        return self.request("DELETE", url, **kwargs)
 
     def head(self, url, **kwargs):
-        method = "HEAD"
-        return self.request(method, url, **kwargs)
+        return self.request("HEAD", url, **kwargs)
 
     def get_urls(self, urls, **kwargs):
         results, temp_urls = [], []
@@ -141,13 +136,13 @@ class RequestsTor:
                     results.extend(temp_results)
                     temp_urls.clear()
                     if self.verbose:
-                        print(f"Progress: {i} urls")
+                        logging.info(f"Progress: {i} urls")
             temp_results = [
                 resp for resp in executor.map(partial(self.get, **kwargs), temp_urls)
             ]
             results.extend(temp_results)
             if self.verbose:
-                print("Progress: finished")
+                logging.info("Progress: finished")
         return results
 
     def test(self):
