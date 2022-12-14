@@ -3,8 +3,7 @@ from time import sleep
 from random import choice
 from itertools import cycle
 from collections import Counter
-from concurrent.futures import ThreadPoolExecutor
-from functools import partial
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import requests
 from stem import Signal
@@ -67,22 +66,24 @@ class RequestsTor:
         self.ports = cycle(tor_ports)
         self.newid_counter = autochange_id * len(tor_ports)
         self.newid_cycle = cycle(range(1, self.newid_counter + 1))
-        self.verbose = verbose
+        if verbose:
+            print(
+                "'verbose' parameter is deprecated. Use logging.basicConfig(level=logging.INFO)."
+            )
+        self.logger = logging.getLogger(__name__)
 
     def new_id(self):
         with Controller.from_port(port=self.tor_cport) as controller:
             controller.authenticate(password=self.password)
             controller.signal(Signal.NEWNYM)
-            if self.verbose:
-                logging.info(
-                    f"\nTOR cport auth: {controller.is_authenticated()}. TOR NEW IDENTITY. Sleep 3 sec.\n"
-                )
+            self.logger.info(
+                f"TOR cport auth: {controller.is_authenticated()}. TOR NEW IDENTITY. Sleep 3 sec."
+            )
             sleep(3)
 
     def check_ip(self):
         my_ip = self.get(choice(IP_API)).text
-        if self.verbose:
-            logging.info(f"my_ip = {my_ip}")
+        self.logger.info(f"my_ip = {my_ip}")
         return my_ip
 
     def request(self, method, url, **kwargs):
@@ -99,8 +100,7 @@ class RequestsTor:
 
         kwargs["headers"] = kwargs.get("headers", TOR_HEADERS)
         resp = requests.request(method, url, **kwargs, proxies=proxies)
-        if self.verbose:
-            logging.info(f"SocksPort={port} status={resp.status_code} url={resp.url}")
+        self.logger.info(f"SocksPort={port} status={resp.status_code} url={resp.url}")
         if self.autochange_id and next(self.newid_cycle) == self.newid_counter:
             self.new_id()
         return resp
@@ -124,25 +124,16 @@ class RequestsTor:
         return self.request("HEAD", url, **kwargs)
 
     def get_urls(self, urls, **kwargs):
-        results, temp_urls = [], []
+        results, fs = [], []
         with ThreadPoolExecutor(max_workers=self.threads) as executor:
             for i, url in enumerate(urls, start=1):
-                temp_urls.append(url)
-                if self.newid_counter and i % self.newid_counter == 0:
-                    temp_results = [
-                        resp
-                        for resp in executor.map(partial(self.get, **kwargs), temp_urls)
-                    ]
-                    results.extend(temp_results)
-                    temp_urls.clear()
-                    if self.verbose:
-                        logging.info(f"Progress: {i} urls")
-            temp_results = [
-                resp for resp in executor.map(partial(self.get, **kwargs), temp_urls)
-            ]
-            results.extend(temp_results)
-            if self.verbose:
-                logging.info("Progress: finished")
+                fs.append(executor.submit(self.get, url, **kwargs))
+                if (self.newid_counter and i % self.newid_counter == 0) or i == len(urls):
+                    for r in as_completed(fs):
+                        results.append(r.result())
+                    fs.clear()
+                    self.logger.info(f"Progress: {i} urls")
+            self.logger.info("Progress: finished")
         return results
 
     def test(self):
