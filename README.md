@@ -12,11 +12,11 @@ Returns [requests.Response](https://docs.python-requests.org/en/latest/api/#requ
 
 Masking as Tor Browser by using its default headers:
 ``` 
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
     "Accept-Encoding": "gzip, deflate, br",
     "Accept-Language": "en-US,en;q=0.5",
     "Upgrade-Insecure-Requests": "1",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101 Firefox/91.0"
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:102.0) Gecko/20100101 Firefox/102.0",
 ```
 
 ### Install
@@ -79,7 +79,7 @@ HashedControlPassword hashed_password
 from requests_tor import RequestsTor
 
 rt = RequestsTor(tor_ports=(9000, 9001, 9002, 9003, 9004), tor_cport=9151, password=None,
-                 autochange_id=5, threads=8, verbose=True)
+                 autochange_id=5, threads=8)
 """
     tor_ports = specify Tor socks ports tuple (default is (9150,), as the default in Tor Browser),
     if more than one port is set, the requests will be sent sequentially through the each port;
@@ -88,7 +88,6 @@ rt = RequestsTor(tor_ports=(9000, 9001, 9002, 9003, 9004), tor_cport=9151, passw
     autochange_id = number of requests via a one Tor socks port (default=5) to change TOR identity,
     specify autochange_id = 0 to turn off autochange Tor identity;
     threads = specify threads to download urls list (default=8);
-    verbose = print debug information (default=False).
     """
     
 # check your ip
