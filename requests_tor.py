@@ -46,6 +46,8 @@ class RequestsTor:
     autochange_id = number of requests via a one Tor socks port (default=5) to change TOR identity,
     specify autochange_id = 0 to turn off autochange Tor identity;
     threads = specify threads to download urls list (default=8).
+    max_retries = should the current Tor exit node IP result in ConnectionTimeout errors, automatically
+    generate a new ID and try again until we've reached our max_tries count (default 5).
     """
 
     def __init__(
@@ -56,6 +58,7 @@ class RequestsTor:
         autochange_id=5,
         threads=8,
         verbose=False,
+        max_retries=5
     ):
         self.tor_ports = tor_ports
         self.tor_cport = tor_cport
@@ -70,6 +73,7 @@ class RequestsTor:
                 "'verbose' parameter is deprecated. Use logging.basicConfig(level=logging.INFO)."
             )
         self.logger = logging.getLogger(__name__)
+        self.amx_retries = max_retries
 
     def new_id(self):
         with Controller.from_port(port=self.tor_cport) as controller:
@@ -104,23 +108,35 @@ class RequestsTor:
             self.new_id()
         return resp
 
+    def attempt(self, method, url, **kwargs):
+        tries = 0
+        while tries < self.max_retries:
+            try:
+                return self.request(method, url, **kwargs)
+            except requests.exceptions.ConnectionError as e:
+                self.logger.error(f"Error: {e}")
+                tries += 1
+                self.logger.info(f"Retry: {tries}")
+                self.new_id()
+        raise requests.exceptions.ConnectionError
+       
     def get(self, url, **kwargs):
-        return self.request("GET", url, **kwargs)
+        return self.attempt("GET", url, **kwargs)
 
     def post(self, url, **kwargs):
-        return self.request("POST", url, **kwargs)
+        return self.attempt("POST", url, **kwargs)
 
     def put(self, url, **kwargs):
-        return self.request("PUT", url, **kwargs)
+        return self.attempt("PUT", url, **kwargs)
 
     def patch(self, url, **kwargs):
-        return self.request("PATCH", url, **kwargs)
+        return self.attempt("PATCH", url, **kwargs)
 
     def delete(self, url, **kwargs):
-        return self.request("DELETE", url, **kwargs)
+        return self.attempt("DELETE", url, **kwargs)
 
     def head(self, url, **kwargs):
-        return self.request("HEAD", url, **kwargs)
+        return self.attempt("HEAD", url, **kwargs)
 
     def get_urls(self, urls, **kwargs):
         results, fs = [], []
