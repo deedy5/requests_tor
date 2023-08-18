@@ -75,10 +75,13 @@ class RequestsTor:
         with Controller.from_port(port=self.tor_cport) as controller:
             controller.authenticate(password=self.password)
             controller.signal(Signal.NEWNYM)
+            wait = round(controller.get_newnym_wait())
             self.logger.info(
-                f"TOR cport auth: {controller.is_authenticated()}. TOR NEW IDENTITY. Sleep 3 sec."
+                f"TOR cport auth: {controller.is_authenticated()}. TOR NEW IDENTITY. Sleep around {wait} sec."
             )
-            sleep(3)
+            while not controller.is_newnym_available():
+                wait = w if (w := wait * 0.5) > 0.5 else 0.5
+                sleep(wait)
 
     def check_ip(self):
         my_ip = self.get(choice(IP_API)).text
