@@ -16,16 +16,13 @@ IP_API = (
     "https://api.my-ip.io/ip",
     "https://api.ipify.org",
     "https://icanhazip.com",
-    "https://ipinfo.io/ip",
     "https://wtfismyip.com/text",
     "https://ifconfig.me/ip",
     "https://checkip.amazonaws.com",
     "https://api.myip.la",
     "https://ipapi.co/ip",
-    "https://trackip.net/ip",
-    "https://ip.rootnet.in",
-    "https://myexternalip.com/raw",
     "https://ip8.com/ip",
+    "https://ipv4v6.lafibre.info/ip.php",
 )
 
 TOR_HEADERS = {
