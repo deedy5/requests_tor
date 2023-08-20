@@ -39,6 +39,9 @@ class RequestsTor:
     tor_ports = specify Tor socks ports tuple (default is (9150,), as the default in Tor Browser),
     if more than one port is set, the requests will be sent sequentially through the each port;
     tor_cport = specify Tor control port (default is 9151 for Tor Browser, for Tor use 9051);
+    tor_host = specify Tor hostname (default is 127.0.0.1), this is used for contacting the Tor
+    service, in addition to the Tor controller.  Because it is used for the controller, it needs to
+    be a valid IP address, and not just the hostname on the network;
     password = specify Tor control port password (default is None);
     autochange_id = number of requests via a one Tor socks port (default=5) to change TOR identity,
     specify autochange_id = 0 to turn off autochange Tor identity;
@@ -49,6 +52,7 @@ class RequestsTor:
         self,
         tor_ports=(9150,),
         tor_cport=9151,
+        tor_host="127.0.0.1",
         password=None,
         autochange_id=5,
         threads=8,
@@ -56,6 +60,7 @@ class RequestsTor:
     ):
         self.tor_ports = tor_ports
         self.tor_cport = tor_cport
+        self.tor_host = tor_host
         self.password = password
         self.autochange_id = autochange_id
         self.threads = threads
@@ -69,7 +74,7 @@ class RequestsTor:
         self.logger = logging.getLogger(__name__)
 
     def new_id(self):
-        with Controller.from_port(port=self.tor_cport) as controller:
+        with Controller.from_port(port=self.tor_cport, address=self.tor_host) as controller:
             controller.authenticate(password=self.password)
             controller.signal(Signal.NEWNYM)
             self.logger.info(
@@ -90,8 +95,8 @@ class RequestsTor:
             del kwargs["proxies"]
 
         proxies = {
-            "http": f"socks5h://localhost:{port}",
-            "https": f"socks5h://localhost:{port}",
+            "http": f"socks5h://{self.tor_host}:{port}",
+            "https": f"socks5h://{self.tor_host}:{port}",
         }
 
         kwargs["headers"] = kwargs.get("headers", TOR_HEADERS)
