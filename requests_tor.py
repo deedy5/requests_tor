@@ -73,7 +73,7 @@ class RequestsTor:
                 "'verbose' parameter is deprecated. Use logging.basicConfig(level=logging.INFO)."
             )
         self.logger = logging.getLogger(__name__)
-        self.amx_retries = max_retries
+        self.max_retries = max_retries
 
     def new_id(self):
         with Controller.from_port(port=self.tor_cport) as controller:
